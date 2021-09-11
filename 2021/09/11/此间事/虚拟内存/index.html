@@ -9,7 +9,7 @@
 	
 	<title>
 	
-		Hello World | 
+		虚拟内存 | 
 	 
 	Wzhy&#39;s Blog
 	</title>
@@ -126,7 +126,7 @@ var _hmt = _hmt || [];
 
 			
 							<ul>
-								<li class="file active">
+								<li class="file">
 									<a href="/2021/09/09/hello%20world/">
 										hello world
 									</a>
@@ -142,7 +142,7 @@ var _hmt = _hmt || [];
 									</a>
 									
 							<ul>
-								<li class="file">
+								<li class="file active">
 									<a href="/2021/09/11/%E6%AD%A4%E9%97%B4%E4%BA%8B/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/">
 										虚拟内存
 									</a>
@@ -162,37 +162,20 @@ var _hmt = _hmt || [];
 	<div id="content">
 		<h1 id="article-title">
 
-	hello world
+	虚拟内存
 </h1>
 <div class="article-meta">
 	
 	<span>Wzhy</span>
-	<span>2021-09-09 22:03:40</span>
+	<span>2021-09-11 18:34:09</span>
 		<div id="article-categories">
     
 		<span>Categories：</span>
-            
-                
-                    <span>
-                        <i class="fa fa-folder" aria-hidden="true">
-                        <a href="/categories/a/">a</a>
-                        </i>
-                      
-                    </span>
-                
             
     
 
     
 		<span>Tags：</span>
-            
-                
-                    <span>
-                        <i class="fa fa-tag" aria-hidden="true">
-                        <a href="/tags/b/">b</a>
-                        </i>
-                    </span>
-                
             
     
 		</div>
@@ -200,19 +183,16 @@ var _hmt = _hmt || [];
 </div>
 
 <div id="article-content">
-	<p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+	<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>虚拟内存是计算机系统内存管理的一种技术。它使得应用程序认为它拥有连续的可用的内存（一个连续完整的地址空间），而实际上，它通常是被分隔成多个物理内存碎片，还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换。目前，大多数操作系统都使用了虚拟内存，如Windows家族的“虚拟内存”；Linux的“交换空间”等。</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>虚拟存储器是由硬件和操作系统自动实现存储信息调度和管理的。它的工作过程包括6个步骤：<br>①中央处理器访问主存的逻辑地址分解成组号a和组内地址b，并对组号a进行地址变换，即将逻辑组号a作为索引，查地址变换表，以确定该组信息是否存放在主存内。<br>②如该组号已在主存内，则转而执行④；如果该组号不在主存内，则检查主存中是否有空闲区，如果没有，便将某个暂时不用的组调出送往辅存，以便将这组信息调入主存。<br>③从辅存读出所要的组，并送到主存空闲区，然后将那个空闲的物理组号a和逻辑组号a登录在地址变换表中。<br>④从地址变换表读出与逻辑组号a对应的物理组号a。<br>⑤从物理组号a和组内字节地址b得到物理地址。<br>⑥根据物理地址从主存中存取必要的信息。</p>
+<h3 id="调度方式"><a href="#调度方式" class="headerlink" title="调度方式"></a>调度方式</h3><p>调度方式有分页式、段式、段页式3种。</p>
+<ul>
+<li>页式调度是将逻辑和物理地址空间都分成固定大小的页。主存按页顺序编号，而每个独立编址的程序空间有自己的页号顺序，通过调度辅存中程序的各页可以离散装入主存中不同的页面位置，并可据表一一对应检索。页式调度的优点是页内零头小，页表对程序员来说是透明的，地址变换快，调入操作简单；缺点是各页不是程序的独立模块，不便于实现程序和数据的保护。</li>
+<li>段式调度是按程序的逻辑结构划分地址空间，段的长度是随意的，并且允许伸长，它的优点是消除了内存零头，易于实现存储保护，便于程序动态装配；缺点是调入操作复杂。将这两种方法结合起来便构成段页式调度。在段页式调度中把物理空间分成页，程序按模块分段，每个段再分成与物理空间页同样小的页面。</li>
+<li>段页式调度综合了段式和页式的优点。其缺点是增加了硬件成本，软件也较复杂。大型通用计算机系统多数采用段页式调度。</li>
+</ul>
+<h3 id="地址变换"><a href="#地址变换" class="headerlink" title="地址变换"></a>地址变换</h3><p>虚拟存储器地址变换基本上有3种形虚拟存储器工作过程式：全联想变换、直接变换和组联想变换。任何逻辑空间页面能够变换到物理空间任何页面位置的方式称为全联想变换。每个逻辑空间页面只能变换到物理空间一个特定页面的方式称为直接变换。组联想变换是指各组之间是直接变换，而组内各页间则是全联想变换。替换规则用来确定替换主存中哪一部分，以便腾空部分主存，存放来自辅存要调入的那部分内容。常见的替换算法有4种。<br>①随机算法：用软件或硬件随机数产生器确定替换的页面。<br>②先进先出：先调入主存的页面先替换。<br>③近期最少使用算法（LRU，Least Recently Used）：替换最长时间不用的页面。<br>④最优算法：替换最长时间以后才使用的页面。这是理想化的算法，只能作为衡量其他各种算法优劣的标准。<br>虚拟存储器的效率是系统性能评价的重要内容，它与主存容量、页面大小、命中率，程序局部性和替换算法等因素有关。 </p>
+<h3 id="关键问题"><a href="#关键问题" class="headerlink" title="关键问题"></a>关键问题</h3><p>(1)调度问题：决定哪些程序和数据应被调入主存。<br>(2)地址映射问题：在访问主存时把虚地址变为主存物理地址（这一过程称为内地址变换）；在访问辅存时把虚地址变成辅存的物理地址（这一过程称为外地址变换），以便换页。此外还要解决主存分配、存储保护与程序再定位等问题。<br>(3)替换问题：决定哪些程序和数据应被调出主存。<br>(4)更新问题：确保主存与辅存的一致性。 </p>
 
 </div>
 
@@ -220,13 +200,13 @@ var _hmt = _hmt || [];
     <div class="post-guide">
         <div class="item left">
             
-              <a href="/2021/09/11/%E6%AD%A4%E9%97%B4%E4%BA%8B/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/">
-                  <i class="fa fa-angle-left" aria-hidden="true"></i>
-                  此间事
-              </a>
-            
         </div>
         <div class="item right">
+            
+              <a href="/2021/09/09/hello%20world/">
+                
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
             
         </div>
     </div>
