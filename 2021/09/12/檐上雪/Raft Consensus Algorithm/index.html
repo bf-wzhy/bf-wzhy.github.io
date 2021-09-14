@@ -223,11 +223,10 @@ var _hmt = _hmt || [];
 	<h2 id="Raft，一种易于理解的共识算法"><a href="#Raft，一种易于理解的共识算法" class="headerlink" title="Raft，一种易于理解的共识算法"></a>Raft，一种易于理解的共识算法</h2><p>源论文：In Search of an Understandable Consensus Algorithm</p>
 <p>作者：Diego Ongaro and John Ousterhout (Stanford University)</p>
 <p>译者：Wzhy</p>
-<h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>​    Raft是一种用于管理replicated log的共识算法。它与(multi-)Paxos在最终结果上是等价的，并且它比Paxos更加高效，但它拥有比Paxos更加易于理解的结构，同时它为构建生产系统提供了更好的基础。为了提高可理解性，Raft分离了共识的关键元素，比如领导者选举，日志复制，安全性，以及密集型的一致性。结果表明Raft是易于学习的。Raft还包括了一种改变集群成员的新机制，它基于重叠的集群主成分来保证安全性。</p>
-<h3 id="Replicated状态机"><a href="#Replicated状态机" class="headerlink" title="Replicated状态机"></a>Replicated状态机</h3><p>​    共识算法通常会使用一种称为Replicated状态机的方法。在这种方法中， 集群的状态机计算出一个状态的若干个相同副本。状态机能够在某些服务器down掉后继续执行操作。Replicated状态机被用来解决分布式系统的容错问题。</p>
+<h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>​        Raft是一种用于管理replicated log的共识算法。它与(multi-)Paxos在最终结果上是等价的，并且它比Paxos更加高效，但它拥有比Paxos更加易于理解的结构，同时它为构建生产系统提供了更好的基础。为了提高可理解性，Raft分离了共识的关键元素，比如领导者选举，日志复制，安全性，以及密集型的一致性。结果表明Raft是易于学习的。Raft还包括了一种改变集群成员的新机制，它基于重叠的集群主成分来保证安全性。</p>
+<h3 id="Replicated状态机"><a href="#Replicated状态机" class="headerlink" title="Replicated状态机"></a>Replicated状态机</h3><p>​        共识算法通常会使用一种称为Replicated状态机的方法。在这种方法中， 集群的状态机计算出一个状态的若干个相同副本。状态机能够在某些服务器down掉后继续执行操作。Replicated状态机被用来解决分布式系统的容错问题。</p>
 <p>![image-20210912210834566](Raft Consensus Algorithm.assets/image-20210912210834566.png)</p>
-<p>​    Replicated状态机通常基于replicated log实现。每个服务器存储一个包含一系列命令的日志，状态机将会依次执行日志中的每个命令。  </p>
-<p>不同服务器上日志中的命令总是具有相同的顺序，所以状态机在每个服务器上的执行结果是相同的。</p>
+<p>​        Replicated状态机通常基于replicated log实现。每个服务器存储一个包含一系列命令的日志，状态机将会依次执行日志中的每个命令。不同服务器上日志中的命令总是具有相同的顺序，所以状态机在每个服务器上的执行结果是相同的。</p>
 <p>​    Keeping the replicated log consistent is the job of the consensus algorithm. The consensus module on a server receives commands from clients and adds them to its log. It communicates with the consensus modules on other servers to ensure that every log eventually contains the same requests in the same order, even if some servers fail. Once commands are properly replicated, each server’s state machine processes them in log order, and the outputs are returned to clients. As a result, the servers appear to form a single, highly reliable state machine. </p>
 <p>​    Consensus algorithms for practical systems typically have the following properties: </p>
 <ul>
@@ -301,11 +300,6 @@ var _hmt = _hmt || [];
 
     <div class="post-guide">
         <div class="item left">
-            
-              <a href="/2021/09/14/%E6%AA%90%E4%B8%8A%E9%9B%AA/Raft%20Consensus%20Algorithm/">
-                  <i class="fa fa-angle-left" aria-hidden="true"></i>
-                  Raft Consensus Algorithm
-              </a>
             
         </div>
         <div class="item right">
